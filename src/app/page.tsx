@@ -52,18 +52,43 @@ function useCountdown(target: number): CountdownSnapshot {
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const easeCurve = [0.16, 1, 0.3, 1] as const;
+
 const heroFade = {
   initial: { opacity: 0, y: 32 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, ease: "easeOut" },
+  transition: { duration: 0.8, ease: easeCurve },
 };
 
 const sectionFade = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.3 },
-  transition: { duration: 0.8, ease: "easeOut" },
+  transition: { duration: 0.8, ease: easeCurve },
 };
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Cemzo",
+  url: "https://cemzo.com",
+  logo: "https://cemzo.com/cemzo-poster.svg",
+  sameAs: [
+    "https://instagram.com",
+    "https://twitter.com",
+    "https://linkedin.com",
+    "https://youtube.com",
+  ],
+  description:
+    "Join the waitlist for Cemzo, an innovative app redefining the digital experience. Coming 2026 to Android & iOS.",
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "press",
+      email: "press@cemzo.com",
+    },
+  ],
+} as const;
 
 function AndroidIcon(props: { className?: string }) {
   return (
@@ -161,6 +186,10 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       <Image
         src="/cemzo-poster.svg"
         alt="Cemzo coming soon poster"
@@ -178,7 +207,7 @@ export default function Home() {
             className="text-lg font-semibold tracking-[0.4em] text-white/80"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: easeCurve }}
           >
             CEMZO
           </motion.span>
@@ -187,7 +216,7 @@ export default function Home() {
             className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium uppercase tracking-[0.2em] text-white shadow-[0_8px_32px_rgba(15,23,42,0.35)] backdrop-blur-xl transition duration-300 hover:bg-white/20"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
+            transition={{ delay: 0.1, duration: 0.6, ease: easeCurve }}
           >
             Join Waitlist
           </motion.a>
@@ -224,7 +253,7 @@ export default function Home() {
           <motion.div
             className="relative w-full max-w-md rounded-[2.5rem] border border-white/15 bg-white/5 p-10 text-center shadow-[0_24px_80px_rgba(59,130,246,0.35)] backdrop-blur-3xl"
             {...heroFade}
-            transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+            transition={{ delay: 0.2, duration: 0.8, ease: easeCurve }}
           >
             <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-500 shadow-[0_16px_40px_rgba(59,130,246,0.45)]">
               <span className="text-3xl font-light tracking-[0.5em]">CZ</span>
@@ -276,7 +305,7 @@ export default function Home() {
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -16 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      transition={{ duration: 0.4, ease: easeCurve }}
                     >
                       {item.value}
                     </motion.span>
@@ -298,7 +327,7 @@ export default function Home() {
           <div className="mx-auto max-w-4xl rounded-[2.5rem] border border-white/15 bg-white/10 p-1 shadow-[0_32px_90px_rgba(37,99,235,0.45)] backdrop-blur-3xl">
             <div className="rounded-[2.4rem] border border-white/10 bg-[rgba(6,11,25,0.85)] p-10">
               <div className="flex flex-col gap-6 text-center lg:flex-row lg:text-left">
-                <motion.div className="flex-1" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }}>
+                <motion.div className="flex-1" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: easeCurve }}>
                   <h2 className="text-3xl font-semibold tracking-tight text-white lg:text-4xl">
                     Be first in line for the Cemzo experience
                   </h2>
@@ -312,7 +341,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
+                  transition={{ delay: 0.1, duration: 0.7, ease: easeCurve }}
                 >
                   <div className="flex flex-col gap-2 text-left">
                     <label htmlFor="name" className="text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
@@ -364,7 +393,7 @@ export default function Home() {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.35, ease: "easeOut" }}
+                        transition={{ duration: 0.35, ease: easeCurve }}
                       >
                         {message}
                       </motion.p>
@@ -386,7 +415,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
+              transition={{ duration: 0.7, ease: easeCurve }}
             >
               Cemzo is reimagining how people connect and share. Stay tuned for the revolution.
             </motion.p>

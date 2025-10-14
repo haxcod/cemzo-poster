@@ -13,7 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cemzo — Coming Soon | The Future Arrives 2026",
+  metadataBase: new URL("https://cemzo.com"),
+  applicationName: "Cemzo",
+  title: {
+    default: "Cemzo — Coming Soon | The Future Arrives 2026",
+    template: "%s | Cemzo",
+  },
   description:
     "Join the waitlist for Cemzo, an innovative app redefining the digital experience. Coming 2026 to Android & iOS.",
   keywords: [
@@ -24,10 +29,37 @@ export const metadata: Metadata = {
     "new app 2026",
     "tech innovation app",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  authors: [{ name: "Cemzo" }],
+  creator: "Cemzo",
+  publisher: "Cemzo",
+  category: "Technology",
   openGraph: {
     title: "Cemzo — Coming Soon | The Future Arrives 2026",
     description:
       "Join the waitlist for Cemzo, an innovative app redefining the digital experience. Coming 2026 to Android & iOS.",
+    url: "https://cemzo.com",
+    siteName: "Cemzo",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/cemzo-poster.svg",
+        width: 1440,
+        height: 900,
+        alt: "Cemzo Coming Soon Poster",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cemzo — Coming Soon | The Future Arrives 2026",
+    description:
+      "Join the waitlist for Cemzo, an innovative app redefining the digital experience. Coming 2026 to Android & iOS.",
+    creator: "@cemzo",
+    site: "@cemzo",
     images: [
       {
         url: "/cemzo-poster.svg",

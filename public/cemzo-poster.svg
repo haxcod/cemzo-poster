@@ -1,0 +1,39 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="backgroundGlow" cx="50%" cy="0%" r="120%">
+      <stop offset="0%" stop-color="#6EE7FF" stop-opacity="0.85" />
+      <stop offset="35%" stop-color="#3D4DE5" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#050719" stop-opacity="1" />
+    </radialGradient>
+    <linearGradient id="accentStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#37F4C0" />
+      <stop offset="100%" stop-color="#7A5CFF" />
+    </linearGradient>
+    <linearGradient id="taglineGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#37F4C0" />
+      <stop offset="50%" stop-color="#6EE7FF" />
+      <stop offset="100%" stop-color="#7A5CFF" />
+    </linearGradient>
+    <filter id="blurBubble">
+      <feGaussianBlur stdDeviation="60" />
+    </filter>
+  </defs>
+  <rect width="1440" height="900" fill="#050719" />
+  <rect width="1440" height="900" fill="url(#backgroundGlow)" />
+  <g opacity="0.45">
+    <ellipse cx="280" cy="120" rx="220" ry="220" fill="#7A5CFF" filter="url(#blurBubble)" />
+    <ellipse cx="1160" cy="780" rx="260" ry="260" fill="#37F4C0" filter="url(#blurBubble)" />
+    <ellipse cx="720" cy="450" rx="320" ry="280" fill="#6EE7FF" filter="url(#blurBubble)" />
+  </g>
+  <rect x="120" y="140" width="1200" height="620" rx="64" stroke="url(#accentStroke)" stroke-opacity="0.45" stroke-width="2" fill="rgba(7,10,26,0.54)" />
+  <g transform="translate(0, 0)">
+    <text x="50%" y="360" text-anchor="middle" font-family="'Space Grotesk', 'Segoe UI', sans-serif" font-size="120" font-weight="700" letter-spacing="12" fill="#F7FBFF">CEMZO</text>
+    <text x="50%" y="470" text-anchor="middle" font-family="'Space Grotesk', 'Segoe UI', sans-serif" font-size="40" letter-spacing="12" fill="#9FB6FF">CONNECTED FUTURES</text>
+    <text x="50%" y="540" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="28" fill="url(#taglineGradient)">Experience the Future. Coming 2026.</text>
+    <text x="50%" y="600" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="18" fill="#D9E4FF" opacity="0.85">Join the waitlist to unlock early access.</text>
+  </g>
+  <g transform="translate(120, 140)" opacity="0.2">
+    <path d="M0 540C200 460 340 360 540 340C780 318 960 430 1200 380" stroke="#D9E4FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="12 24" />
+    <path d="M0 480C220 420 360 260 600 240C800 222 1000 320 1200 300" stroke="#7A5CFF" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 18" />
+  </g>
+</svg>

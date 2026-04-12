@@ -12,7 +12,7 @@ type CountdownSnapshot = {
   completed: boolean;
 };
 
-const launchTimestamp = Date.UTC(2026, 0, 1, 0, 0, 0);
+const launchTimestamp = Date.UTC(2026, 7, 15, 0, 0, 0);
 
 function useCountdown(target: number): CountdownSnapshot {
   const compute = useCallback(() => {

@@ -1,14 +1,16 @@
 import { NextResponse } from "next/server";
+import { MailtrapClient } from "mailtrap";
 
-const BREVO_API_KEY = process.env.BREVO_API_KEY;
-const BREVO_LIST_ID = process.env.BREVO_LIST_ID;
+const MAILTRAP_API_TOKEN = process.env.MAILTRAP_API_TOKEN;
+const MAILTRAP_FROM_EMAIL = process.env.MAILTRAP_FROM_EMAIL || "hello@demomailtrap.co";
+const MAILTRAP_FROM_NAME = process.env.MAILTRAP_FROM_NAME || "Cemzo Team";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
-  if (!BREVO_API_KEY) {
+  if (!MAILTRAP_API_TOKEN) {
     return NextResponse.json(
-      { error: "Mailing integration is not configured." },
+      { error: "Email integration is not configured." },
       { status: 500 },
     );
   }
@@ -34,35 +36,23 @@ export async function POST(request: Request) {
     );
   }
 
-  const listId = BREVO_LIST_ID ? Number.parseInt(BREVO_LIST_ID, 10) : undefined;
+  const client = new MailtrapClient({ token: MAILTRAP_API_TOKEN });
 
-  const response = await fetch("https://api.brevo.com/v3/contacts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "api-key": BREVO_API_KEY,
-    },
-    body: JSON.stringify({
-      email,
-      attributes: {
-        FIRSTNAME: name,
-      },
-      listIds: listId ? [listId] : undefined,
-      updateEnabled: true,
-    }),
-  });
+  try {
+    await client.send({
+      from: { email: MAILTRAP_FROM_EMAIL, name: MAILTRAP_FROM_NAME },
+      to: [{ email }],
+      subject: "Welcome to the Cemzo Waitlist!",
+      text: `Hi ${name},\n\nThanks for joining the Cemzo waitlist! We'll keep you updated on our launch and exclusive early access.\n\nBest,\nThe Cemzo Team`,
+      category: "Waitlist Signup",
+    });
 
-  if (!response.ok) {
-    const details = await response.json().catch(() => null);
+    return NextResponse.json({ message: "Thanks for joining the waitlist!" }, { status: 201 });
+  } catch (error) {
+    console.error("Mailtrap send error:", error);
     const message =
-      typeof details?.message === "string"
-        ? details.message
-        : typeof details?.error === "string"
-          ? details.error
-          : "We couldn't add you to the waitlist just yet.";
+      error instanceof Error ? error.message : "We couldn't add you to the waitlist just yet.";
 
-    return NextResponse.json({ error: message }, { status: response.status });
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-
-  return NextResponse.json({ message: "Thanks for joining the waitlist!" }, { status: 201 });
 }

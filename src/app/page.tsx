@@ -143,8 +143,12 @@ export default function Home() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const trimmedName = formData.name.trim();
-    const trimmedEmail = formData.email.trim();
+    const formData = event.target as HTMLFormElement;
+    const nameInput = formData.name as HTMLInputElement;
+    const emailInput = formData.email as HTMLInputElement;
+
+    const trimmedName = nameInput.value.trim();
+    const trimmedEmail = emailInput.value.trim();
 
     if (!trimmedName) {
       setStatus("error");
@@ -162,17 +166,22 @@ export default function Home() {
     setMessage("");
 
     try {
-      const response = await fetch("/api/waitlist", {
+      const formDataObj = new FormData();
+      formDataObj.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "");
+      formDataObj.append("name", trimmedName);
+      formDataObj.append("email", trimmedEmail);
+      formDataObj.append("subject", `New Waitlist Signup: ${trimmedName}`);
+      formDataObj.append("message", `Name: ${trimmedName}\nEmail: ${trimmedEmail}`);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: trimmedName, email: trimmedEmail }),
+        body: formDataObj,
       });
 
-      if (!response.ok) {
-        const payload = (await response.json().catch(() => null)) as
-          | { error?: string; message?: string }
-          | null;
-        throw new Error(payload?.error ?? payload?.message ?? "We couldn't add you right now.");
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.message || "We couldn't add you right now.");
       }
 
       setStatus("success");

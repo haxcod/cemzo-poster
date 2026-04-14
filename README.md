@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+MAILTRAP_API_TOKEN=your_mailtrap_api_token_here
+MAILTRAP_FROM_EMAIL=hello@demomailtrap.co
+MAILTRAP_FROM_NAME=Cemzo Team
+```
+
+Get your Mailtrap API token from [Mailtrap Dashboard](https://mailtrap.io).
+
 ## Getting Started
 
 First, run the development server:

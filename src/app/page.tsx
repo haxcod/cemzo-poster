@@ -143,12 +143,8 @@ export default function Home() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = event.target as HTMLFormElement;
-    const nameInput = formData.name as HTMLInputElement;
-    const emailInput = formData.email as HTMLInputElement;
-
-    const trimmedName = nameInput.value.trim();
-    const trimmedEmail = emailInput.value.trim();
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
 
     if (!trimmedName) {
       setStatus("error");
